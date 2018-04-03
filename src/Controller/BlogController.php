@@ -13,7 +13,7 @@ class BlogController extends Controller
     
     public function list()
     {
-        return new Response('Future page to show one space article!');
+        return $this->render('blog/homepage.html.twig');
     }
 
     public function show($slug)

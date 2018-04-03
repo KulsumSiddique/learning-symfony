@@ -5,7 +5,7 @@ use Symfony\Component\Routing\Route;
 use App\Controller\BlogController;
 
 $routes = new RouteCollection();
-$routes->add('blog_list', new Route('/blog', array(
+$routes->add('app_homepage', new Route('/', array(
     '_controller' => [BlogController::class, 'list']
 )));
 
