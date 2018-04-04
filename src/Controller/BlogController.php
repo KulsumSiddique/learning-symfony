@@ -5,16 +5,24 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
-    
-    public function list()
+     /**
+     * @Route("/", name="app_homepage")
+     */
+
+    public function homepage()
     {
         return $this->render('blog/homepage.html.twig');
     }
+    
+    /**
+     * @Route("/blog/{slug}", name="blog_show")
+     */
+
 
     public function show($slug)
     {
@@ -26,8 +34,19 @@ class BlogController extends Controller
         dump($slug, $this);
         return $this->render('blog/show.html.twig', [
             'title' => ucwords(str_replace('-', ' ', $slug)),
+            'slug' => $slug,
             'comments' => $comments,
         ]);
+    }
+
+    /**
+     * @Route("/blog/{slug}/heart", name="blog_toggle_heart", methods={"POST"})
+     */
+
+    public function toggleArticleHeart($slug)
+    {
+        // TODO - actually heart/unheart the article!
+        return new JsonResponse(['hearts' => rand(5, 100)]);
     }
 
 }
